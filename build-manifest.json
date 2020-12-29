@@ -9,7 +9,7 @@
       "imports": []
     },
     "web_modules/tone.js": {
-      "bytes": 754803,
+      "bytes": 754808,
       "imports": []
     },
     "randomInt.js": {
@@ -29,7 +29,7 @@
       "imports": []
     },
     "main.js": {
-      "bytes": 4237,
+      "bytes": 4357,
       "imports": [
         {
           "path": "web_modules/three.js"
@@ -85,10 +85,10 @@
           "bytesInOutput": 57
         },
         "main.js": {
-          "bytesInOutput": 2201
+          "bytesInOutput": 2268
         }
       },
-      "bytes": 779559
+      "bytes": 779626
     }
   }
 }
