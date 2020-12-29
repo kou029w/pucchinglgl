@@ -12,14 +12,35 @@
       "bytes": 124,
       "imports": []
     },
+    "keyPosition.js": {
+      "bytes": 209,
+      "imports": []
+    },
+    "config/keyLayouts.js": {
+      "bytes": 398,
+      "imports": []
+    },
+    "config/pallet.js": {
+      "bytes": 93,
+      "imports": []
+    },
     "main.js": {
-      "bytes": 4085,
+      "bytes": 3619,
       "imports": [
         {
           "path": "web_modules/three.js"
         },
         {
           "path": "randomInt.js"
+        },
+        {
+          "path": "keyPosition.js"
+        },
+        {
+          "path": "config/keyLayouts.js"
+        },
+        {
+          "path": "config/pallet.js"
         }
       ]
     }
@@ -42,13 +63,22 @@
           "bytesInOutput": 555672
         },
         "randomInt.js": {
-          "bytesInOutput": 75
+          "bytesInOutput": 76
+        },
+        "keyPosition.js": {
+          "bytesInOutput": 120
+        },
+        "config/keyLayouts.js": {
+          "bytesInOutput": 303
+        },
+        "config/pallet.js": {
+          "bytesInOutput": 57
         },
         "main.js": {
-          "bytesInOutput": 2257
+          "bytesInOutput": 1810
         }
       },
-      "bytes": 558006
+      "bytes": 558042
     }
   }
 }
