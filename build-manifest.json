@@ -29,7 +29,7 @@
       "imports": []
     },
     "main.js": {
-      "bytes": 4357,
+      "bytes": 4263,
       "imports": [
         {
           "path": "web_modules/three.js"
@@ -85,10 +85,10 @@
           "bytesInOutput": 57
         },
         "main.js": {
-          "bytesInOutput": 2268
+          "bytesInOutput": 2203
         }
       },
-      "bytes": 779626
+      "bytes": 779561
     }
   }
 }
