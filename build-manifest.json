@@ -8,6 +8,10 @@
       "bytes": 1048613,
       "imports": []
     },
+    "web_modules/tone.js": {
+      "bytes": 754803,
+      "imports": []
+    },
     "randomInt.js": {
       "bytes": 124,
       "imports": []
@@ -25,10 +29,13 @@
       "imports": []
     },
     "main.js": {
-      "bytes": 3619,
+      "bytes": 4117,
       "imports": [
         {
           "path": "web_modules/three.js"
+        },
+        {
+          "path": "web_modules/tone.js"
         },
         {
           "path": "randomInt.js"
@@ -60,10 +67,13 @@
       "exports": [],
       "inputs": {
         "web_modules/three.js": {
-          "bytesInOutput": 555672
+          "bytesInOutput": 555725
+        },
+        "web_modules/tone.js": {
+          "bytesInOutput": 220132
         },
         "randomInt.js": {
-          "bytesInOutput": 76
+          "bytesInOutput": 73
         },
         "keyPosition.js": {
           "bytesInOutput": 120
@@ -75,10 +85,10 @@
           "bytesInOutput": 57
         },
         "main.js": {
-          "bytesInOutput": 1810
+          "bytesInOutput": 2125
         }
       },
-      "bytes": 558042
+      "bytes": 779483
     }
   }
 }
