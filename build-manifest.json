@@ -4,12 +4,12 @@
       "bytes": 45,
       "imports": []
     },
-    "web_modules/three.js": {
+    "_snowpack/pkg/three.js": {
       "bytes": 1048613,
       "imports": []
     },
-    "web_modules/tone.js": {
-      "bytes": 754808,
+    "_snowpack/pkg/tone.js": {
+      "bytes": 757382,
       "imports": []
     },
     "randomInt.js": {
@@ -29,13 +29,13 @@
       "imports": []
     },
     "main.js": {
-      "bytes": 4263,
+      "bytes": 4252,
       "imports": [
         {
-          "path": "web_modules/three.js"
+          "path": "_snowpack/pkg/three.js"
         },
         {
-          "path": "web_modules/tone.js"
+          "path": "_snowpack/pkg/tone.js"
         },
         {
           "path": "randomInt.js"
@@ -53,7 +53,7 @@
     }
   },
   "outputs": {
-    "../node_modules/.cache/snowpack/~~bundle~~/index.html.inline.0.css": {
+    "../~~bundle~~/index.html.inline.0.css": {
       "imports": [],
       "inputs": {
         "index.html.inline.0.css": {
@@ -62,33 +62,33 @@
       },
       "bytes": 15
     },
-    "../node_modules/.cache/snowpack/~~bundle~~/main.js": {
+    "../~~bundle~~/main.js": {
       "imports": [],
       "exports": [],
       "inputs": {
-        "web_modules/three.js": {
-          "bytesInOutput": 555725
+        "_snowpack/pkg/three.js": {
+          "bytesInOutput": 554971
         },
-        "web_modules/tone.js": {
-          "bytesInOutput": 220132
+        "_snowpack/pkg/tone.js": {
+          "bytesInOutput": 220168
         },
         "randomInt.js": {
-          "bytesInOutput": 73
+          "bytesInOutput": 76
         },
         "keyPosition.js": {
-          "bytesInOutput": 120
+          "bytesInOutput": 121
         },
         "config/keyLayouts.js": {
-          "bytesInOutput": 303
+          "bytesInOutput": 308
         },
         "config/pallet.js": {
-          "bytesInOutput": 57
+          "bytesInOutput": 62
         },
         "main.js": {
-          "bytesInOutput": 2203
+          "bytesInOutput": 2207
         }
       },
-      "bytes": 779561
+      "bytes": 778857
     }
   }
 }
