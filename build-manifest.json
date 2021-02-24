@@ -5,7 +5,7 @@
       "imports": []
     },
     "_snowpack/pkg/three.js": {
-      "bytes": 1006621,
+      "bytes": 788729,
       "imports": []
     },
     "_snowpack/pkg/tone.js": {
@@ -73,10 +73,10 @@
       "exports": [],
       "inputs": {
         "_snowpack/pkg/three.js": {
-          "bytesInOutput": 534923
+          "bytesInOutput": 439442
         },
         "_snowpack/pkg/tone.js": {
-          "bytesInOutput": 220378
+          "bytesInOutput": 220354
         },
         "randomInt.js": {
           "bytesInOutput": 76
@@ -91,10 +91,10 @@
           "bytesInOutput": 62
         },
         "main.js": {
-          "bytesInOutput": 2207
+          "bytesInOutput": 2208
         }
       },
-      "bytes": 759019
+      "bytes": 663515
     }
   }
 }
