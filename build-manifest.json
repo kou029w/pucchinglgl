@@ -9,7 +9,7 @@
       "imports": []
     },
     "_snowpack/pkg/tone.js": {
-      "bytes": 758132,
+      "bytes": 758126,
       "imports": []
     },
     "randomInt.js": {
@@ -61,6 +61,7 @@
   "outputs": {
     "../~~bundle~~/index.html.inline.0.css": {
       "imports": [],
+      "entryPoint": "index.html.inline.0.css",
       "inputs": {
         "index.html.inline.0.css": {
           "bytesInOutput": 14
@@ -71,6 +72,7 @@
     "../~~bundle~~/main.js": {
       "imports": [],
       "exports": [],
+      "entryPoint": "main.js",
       "inputs": {
         "_snowpack/pkg/three.js": {
           "bytesInOutput": 439442
