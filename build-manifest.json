@@ -9,7 +9,7 @@
       "imports": []
     },
     "_snowpack/pkg/tone.js": {
-      "bytes": 758126,
+      "bytes": 758308,
       "imports": []
     },
     "randomInt.js": {
@@ -78,7 +78,7 @@
           "bytesInOutput": 439442
         },
         "_snowpack/pkg/tone.js": {
-          "bytesInOutput": 220354
+          "bytesInOutput": 220450
         },
         "randomInt.js": {
           "bytesInOutput": 76
@@ -96,7 +96,7 @@
           "bytesInOutput": 2208
         }
       },
-      "bytes": 663515
+      "bytes": 663611
     }
   }
 }
