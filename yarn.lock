@@ -23,7 +23,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/runtime@^7.21.5", "@babel/runtime@^7.22.3":
+"@babel/runtime@^7.22.3":
   version "7.22.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.3.tgz#0a7fce51d43adbf0f7b517a71f4c3aaca92ebcbb"
   integrity sha512-XsDuspWKLUsxwCp6r7EhsExHtYfbe5oAGQ19kqngTdCPUoPQzOPdUbD/pB9PJiwb2ptYKQDjSJT3R6dC+EPqfQ==
@@ -422,12 +422,12 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-automation-events@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-6.0.2.tgz#52b353b7fcab8ed298e0009624f48213e3e064a0"
-  integrity sha512-ChQLxXMMiqJW9frPKOhCSsk96rWSgbzYXzAexLY+OOVS7qRkS5+C2wUnjhpDbJb2guJ211I1fYiq5wUxBE5NdA==
+automation-events@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-6.0.3.tgz#6123cbc74769a304518e5c84a0f0e10f715455cb"
+  integrity sha512-RxBkiL3EVdKcRphs/G7E142fPITrXRHOUwpOc/pWio5EY5P17MNdn5YeIvIFcmtZJ55cWHGDzuKzRlPsB7ZRkg==
   dependencies:
-    "@babel/runtime" "^7.21.5"
+    "@babel/runtime" "^7.22.3"
     tslib "^2.5.2"
 
 aws-sign2@~0.7.0:
@@ -2587,12 +2587,12 @@ ssri@^8.0.0, ssri@^8.0.1:
     minipass "^3.1.1"
 
 standardized-audio-context@^25.1.8:
-  version "25.3.49"
-  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.3.49.tgz#7ca250fd8b049f3af5989de16e6cd7344f40558c"
-  integrity sha512-ftsrjD4TkKEQN3rHFRmGb1ueU/So8XBZRkuCu/FflJFMcpWXx3z7Dj0WccG4bQ5/jSB8QJIjLbTSS1XSd49Olg==
+  version "25.3.50"
+  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.3.50.tgz#15f418ee7879bbce8869c45680c59238bc96c200"
+  integrity sha512-FGuX3OBOQ7qj9pjX6Fx7SbrIWxYIx02i7iWr04DBo/Gxzm2pEpZpaZ411ew6PLet7hfgbKbp5tDII2jnftRetQ==
   dependencies:
     "@babel/runtime" "^7.22.3"
-    automation-events "^6.0.2"
+    automation-events "^6.0.3"
     tslib "^2.5.2"
 
 string-hash@^1.1.1:
@@ -2707,9 +2707,9 @@ treeverse@^1.0.4:
   integrity sha512-whw60l7r+8ZU8Tu/Uc2yxtc4ZTZbR/PF3u1IPNKGQ6p8EICLb3Z2lAgoqw9bqYd8IkgnsaOcLzYHFckjqNsf0g==
 
 tslib@^2.0.1, tslib@^2.2.0, tslib@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
-  integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
+  integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
