@@ -9,7 +9,7 @@
   "devDependencies": {
     "snowpack": "^3.0.0",
     "three": "^0.156.0",
-    "tone": "^14.7.58"
+    "tone": "^15.0.0"
   },
   "scripts": {
     "dev": "snowpack dev",
