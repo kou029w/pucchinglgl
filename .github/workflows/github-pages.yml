@@ -11,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
-      - uses: actions/setup-node@v3
-        with: { node-version: lts/*, cache: yarn }
+      - uses: oven-sh/setup-bun@v2
       - name: Build
         run: |
-          yarn install
-          yarn build
-      - uses: actions/upload-pages-artifact@v5
+          bun install --frozen-lockfile
+          bun run build
+      - uses: actions/upload-pages-artifact@v2
         with:
-          path: build
+          path: dist
       - uses: actions/deploy-pages@v2
