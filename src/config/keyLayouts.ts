@@ -1,4 +1,3 @@
-/** キーボード配列。プロパティ `KeyboardEvent.key` 相当の空白 ` ` 区切りの文字列の配列 */
 const keyLayouts = {
   default: [
     `\` 1 2 3 4 5 6 7 8 9 0 - = Backspace`,
