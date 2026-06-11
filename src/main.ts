@@ -20,9 +20,7 @@ const scene = new Scene();
 const camera = new PerspectiveCamera();
 const grid = { colum: 14, row: 4 } as const;
 const mouse = new Vector2(NaN, NaN);
-// すべての矩形で 1 つのジオメトリを共有し、GPU リソースの確保を抑える
 const planeGeometry = new PlaneGeometry(1, 1);
-// 色ごとにマテリアルを 1 つだけ用意して使い回す
 const materials = pallet.map((color) => new MeshBasicMaterial({ color }));
 const panels = Array.from({ length: grid.colum * grid.row }, (_, i) => {
   const material = new MeshBasicMaterial({ opacity: 0 });
@@ -35,7 +33,6 @@ const renderer = new WebGLRenderer();
 const canvas = renderer.domElement;
 const raycaster = new Raycaster();
 
-// 1 フレームに 1 回だけ描画するようリクエストをまとめる
 let renderRequested = false;
 function render() {
   renderRequested = false;
@@ -68,7 +65,6 @@ function drawRect() {
   mesh.scale.set(0.075 + offset(), 0.075 + offset(), 0);
   Object.assign(mesh.position, intersect.point);
   scene.add(mesh);
-  // 連続入力でも requestAnimationFrame に描画を集約する
   requestRender();
 }
 
