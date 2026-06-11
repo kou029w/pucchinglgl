@@ -109,7 +109,7 @@ function main() {
   Object.assign(root.style, {
     overflow: "hidden",
     overscrollBehavior: "none",
-    background: "black",
+    background: "white",
   });
   window.addEventListener("resize", resize);
   setup();
