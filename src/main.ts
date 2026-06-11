@@ -1,14 +1,3 @@
-import {
-  Color,
-  Mesh,
-  MeshBasicMaterial,
-  PerspectiveCamera,
-  PlaneGeometry,
-  Raycaster,
-  Scene,
-  Vector2,
-  WebGLRenderer,
-} from "three";
 import { Oscillator } from "tone";
 import randomInt from "./randomInt";
 import keyPosition from "./keyPosition";
@@ -16,56 +5,42 @@ import keyLayouts from "./config/keyLayouts";
 import pallet from "./config/pallet";
 
 const root = document.body;
-const scene = new Scene();
-const camera = new PerspectiveCamera();
 const grid = { colum: 14, row: 4 } as const;
-const mouse = new Vector2(NaN, NaN);
-const planeGeometry = new PlaneGeometry(1, 1);
-const materials = pallet.map((color) => new MeshBasicMaterial({ color }));
-const panels = Array.from({ length: grid.colum * grid.row }, (_, i) => {
-  const material = new MeshBasicMaterial({ opacity: 0 });
-  const mesh = new Mesh(planeGeometry, material);
-  const note = `${"CDEFGAB"[i % 7]}${Math.floor(i / 7)}`;
-  mesh.userData.osc = new Oscillator(note, "square").toDestination();
-  return mesh;
-});
-const renderer = new WebGLRenderer();
-const canvas = renderer.domElement;
-const raycaster = new Raycaster();
-
-let renderRequested = false;
-function render() {
-  renderRequested = false;
-  renderer.render(scene, camera);
-}
-function requestRender() {
-  if (renderRequested) return;
-  renderRequested = true;
-  window.requestAnimationFrame(render);
-}
+const oscillators = Array.from(
+  { length: grid.colum * grid.row },
+  (_, i) =>
+    new Oscillator(
+      `${"CDEFGAB"[i % 7]}${Math.floor(i / 7)}`,
+      "square"
+    ).toDestination()
+);
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d")!;
 
 function tone(osc: Oscillator) {
   osc.start();
   osc.stop("+0.05");
 }
 
-function drawRect() {
-  raycaster.setFromCamera(mouse, camera);
-  const [intersect] = raycaster.intersectObjects(panels);
-  if (!intersect) return;
+function draw(px: number, py: number) {
+  if (Number.isNaN(px) || Number.isNaN(py)) return;
+
+  const col = Math.floor((px / canvas.width) * grid.colum);
+  const screenRow = Math.floor((py / canvas.height) * grid.row);
+  if (col < 0 || col >= grid.colum || screenRow < 0 || screenRow >= grid.row) {
+    return;
+  }
 
   try {
     // FIXME: Error: Start time must be strictly greater than previous start time.
-    tone(intersect.object.userData.osc);
+    tone(oscillators[(grid.row - 1 - screenRow) * grid.colum + col]!);
   } catch {}
 
-  const material = materials[randomInt(materials.length - 1)];
-  const mesh = new Mesh(planeGeometry, material);
   const offset = () => 0.05 * (Math.random() - 0.5);
-  mesh.scale.set(0.075 + offset(), 0.075 + offset(), 0);
-  Object.assign(mesh.position, intersect.point);
-  scene.add(mesh);
-  requestRender();
+  const width = (0.08 + offset()) * canvas.height;
+  const height = (0.08 + offset()) * canvas.height;
+  ctx.fillStyle = pallet[randomInt(pallet.length - 1)]!;
+  ctx.fillRect(px - width / 2, py - height / 2, width, height);
 }
 
 function handleKeydown({ key }: KeyboardEvent) {
@@ -77,59 +52,47 @@ function handleKeydown({ key }: KeyboardEvent) {
   ];
 
   const offset = () => Math.random() - 0.5;
-  mouse.x = ((x + offset()) / (grid.colum - 1)) * 2 - 1;
-  mouse.y = -((y + offset()) / (grid.row - 1)) * 2 + 1;
-
-  drawRect();
+  draw(
+    ((x + offset()) / (grid.colum - 1)) * canvas.width,
+    ((y + offset()) / (grid.row - 1)) * canvas.height
+  );
 }
 
 function handleMouseMove(event: { clientX: number; clientY: number }) {
-  const offset = () => 0.2 * (Math.random() - 0.5);
-  mouse.x = (event.clientX / canvas.clientWidth) * 2 - 1 + offset();
-  mouse.y = -(event.clientY / canvas.clientHeight) * 2 + 1 + offset();
-
-  drawRect();
+  const { left, top } = canvas.getBoundingClientRect();
+  const offset = () => 0.1 * (Math.random() - 0.5);
+  draw(
+    event.clientX - left + offset() * canvas.width,
+    event.clientY - top + offset() * canvas.height
+  );
 }
 
 function handleTouchmove(event: TouchEvent) {
   event.preventDefault();
-  [...event.touches].map(handleMouseMove);
+  [...event.touches].forEach(handleMouseMove);
 }
 
-function handleMouseMoveEnd() {
-  mouse.set(NaN, NaN);
-}
+function resize() {
+  if (canvas.width === 0 || canvas.height === 0) return setup();
 
-function adjustPanelSize() {
-  const width = camera.aspect / grid.colum;
-  const height = 1 / grid.row;
-  for (const [i, panel] of panels.entries()) {
-    panel.scale.set(width, height, 1);
-    Object.assign(panel.position, {
-      x: width * ((i % grid.colum) - (grid.colum - 1) / 2),
-      y: height * (Math.floor(i / grid.colum) - (grid.row - 1) / 2),
-    });
-  }
-}
+  const snapshot = document.createElement("canvas");
+  snapshot.width = canvas.width;
+  snapshot.height = canvas.height;
+  snapshot.getContext("2d")!.drawImage(canvas, 0, 0);
 
-function adjustRendererSize() {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = canvas.clientWidth / canvas.clientHeight;
-  camera.updateProjectionMatrix();
-  adjustPanelSize();
-  requestRender();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.drawImage(snapshot, 0, 0, canvas.width, canvas.height);
 }
 
 function setup() {
-  scene.background = new Color();
-  scene.clear();
-  scene.add(...panels);
-  camera.position.z = 1;
-  adjustRendererSize();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function main() {
-  Object.assign(canvas.style, { width: "100%", height: "100%" });
+  Object.assign(canvas.style, { width: "100%", height: "100%", display: "block" });
   root.addEventListener("keydown", handleKeydown);
   root.addEventListener("touchstart", handleTouchmove, { passive: false });
   root.addEventListener("touchmove", handleTouchmove, { passive: false });
@@ -142,12 +105,13 @@ function main() {
       root.removeEventListener("mousemove", handleMouseMove);
     });
   }
-  for (const event of ["keyup", "mouseup", "mouseleave", "touchend"] as const) {
-    root.addEventListener(event, handleMouseMoveEnd);
-  }
   root.appendChild(canvas);
-  Object.assign(root.style, { overflow: "hidden", overscrollBehavior: "none" });
-  window.addEventListener("resize", adjustRendererSize);
+  Object.assign(root.style, {
+    overflow: "hidden",
+    overscrollBehavior: "none",
+    background: "black",
+  });
+  window.addEventListener("resize", resize);
   setup();
 }
 
