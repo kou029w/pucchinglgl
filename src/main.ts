@@ -20,10 +20,13 @@ const scene = new Scene();
 const camera = new PerspectiveCamera();
 const grid = { colum: 14, row: 4 } as const;
 const mouse = new Vector2(NaN, NaN);
+// すべての矩形で 1 つのジオメトリを共有し、GPU リソースの確保を抑える
+const planeGeometry = new PlaneGeometry(1, 1);
+// 色ごとにマテリアルを 1 つだけ用意して使い回す
+const materials = pallet.map((color) => new MeshBasicMaterial({ color }));
 const panels = Array.from({ length: grid.colum * grid.row }, (_, i) => {
-  const geometry = new PlaneGeometry();
   const material = new MeshBasicMaterial({ opacity: 0 });
-  const mesh = new Mesh(geometry, material);
+  const mesh = new Mesh(planeGeometry, material);
   const note = `${"CDEFGAB"[i % 7]}${Math.floor(i / 7)}`;
   mesh.userData.osc = new Oscillator(note, "square").toDestination();
   return mesh;
@@ -32,8 +35,16 @@ const renderer = new WebGLRenderer();
 const canvas = renderer.domElement;
 const raycaster = new Raycaster();
 
+// 1 フレームに 1 回だけ描画するようリクエストをまとめる
+let renderRequested = false;
 function render() {
+  renderRequested = false;
   renderer.render(scene, camera);
+}
+function requestRender() {
+  if (renderRequested) return;
+  renderRequested = true;
+  window.requestAnimationFrame(render);
 }
 
 function tone(osc: Oscillator) {
@@ -51,17 +62,14 @@ function drawRect() {
     tone(intersect.object.userData.osc);
   } catch {}
 
-  const color = pallet[randomInt(pallet.length - 1)];
-  const geometry = new PlaneGeometry(1, 1);
-  const material = new MeshBasicMaterial({ color });
-  const mesh = new Mesh(geometry, material);
+  const material = materials[randomInt(materials.length - 1)];
+  const mesh = new Mesh(planeGeometry, material);
   const offset = () => 0.05 * (Math.random() - 0.5);
   mesh.scale.set(0.075 + offset(), 0.075 + offset(), 0);
   Object.assign(mesh.position, intersect.point);
   scene.add(mesh);
-  render();
-  // NOTE: 1度だけだと正しく表示されないことがあるのでもう一度renderする。原因よくわからない。
-  window.requestAnimationFrame(render);
+  // 連続入力でも requestAnimationFrame に描画を集約する
+  requestRender();
 }
 
 function handleKeydown({ key }: KeyboardEvent) {
@@ -113,7 +121,7 @@ function adjustRendererSize() {
   camera.aspect = canvas.clientWidth / canvas.clientHeight;
   camera.updateProjectionMatrix();
   adjustPanelSize();
-  render();
+  requestRender();
 }
 
 function setup() {
