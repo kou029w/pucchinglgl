@@ -6,20 +6,18 @@ import pallet from "./config/pallet";
 
 const root = document.body;
 const grid = { colum: 14, row: 4 } as const;
-const oscillators = Array.from(
+const notes = Array.from(
   { length: grid.colum * grid.row },
-  (_, i) =>
-    new Oscillator(
-      `${"CDEFGAB"[i % 7]}${Math.floor(i / 7)}`,
-      "square"
-    ).toDestination()
+  (_, i) => `${"CDEFGAB"[i % 7]}${Math.floor(i / 7)}`
 );
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d")!;
 
-function tone(osc: Oscillator) {
+function tone(note: string) {
+  const osc = new Oscillator(note, "square").toDestination();
   osc.start();
   osc.stop("+0.05");
+  setTimeout(() => osc.dispose(), 200);
 }
 
 function draw(px: number, py: number) {
@@ -31,10 +29,7 @@ function draw(px: number, py: number) {
     return;
   }
 
-  try {
-    // FIXME: Error: Start time must be strictly greater than previous start time.
-    tone(oscillators[(grid.row - 1 - screenRow) * grid.colum + col]!);
-  } catch {}
+  tone(notes[(grid.row - 1 - screenRow) * grid.colum + col]!);
 
   const offset = () => 0.05 * (Math.random() - 0.5);
   const width = (0.08 + offset()) * canvas.height;
