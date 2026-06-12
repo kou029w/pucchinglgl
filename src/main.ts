@@ -1,4 +1,4 @@
-import { Oscillator } from "tone";
+import { Oscillator, start as toneStart, getContext } from "tone";
 import randomInt from "./randomInt";
 import keyPosition from "./keyPosition";
 import keyLayouts from "./config/keyLayouts";
@@ -14,10 +14,17 @@ const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d")!;
 
 function tone(note: string) {
-  const osc = new Oscillator(note, "square").toDestination();
-  osc.start();
-  osc.stop("+0.05");
-  setTimeout(() => osc.dispose(), 200);
+  const play = () => {
+    const osc = new Oscillator(note, "square").toDestination();
+    osc.start();
+    osc.stop("+0.05");
+    setTimeout(() => osc.dispose(), 200);
+  };
+  if (getContext().state === "running") {
+    play();
+  } else {
+    void toneStart().then(play);
+  }
 }
 
 function draw(px: number, py: number) {
